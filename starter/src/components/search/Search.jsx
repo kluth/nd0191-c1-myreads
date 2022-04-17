@@ -22,11 +22,13 @@ const Search = ({books, setBooks}) => {
                     return book;
             });
             setFoundBooks(booksFromSearch);
-        });
+        }).catch((error) => {
+            setFoundBooks([]);
+            });
         } else {
             setFoundBooks([]);
         }
-    }, [query, foundBooks.length]);
+    }, [query, foundBooks.length, books]);
     
     
   return (

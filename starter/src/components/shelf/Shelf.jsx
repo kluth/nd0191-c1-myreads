@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import { Link } from 'react-router-dom';
 import { getAll } from '../../BooksAPI'
 import Panel from './Panel';
@@ -14,6 +14,19 @@ const Shelf = ({books, setBooks}) => {
  * Gets all the books from the database and sets them to the state.
  * @returns None
  */
+useCallback(
+  () => {
+    getAllBooks().then(books => {
+        setBooks(books);
+        }).catch((error) => {
+            console.log(error);
+        }
+    );
+  },
+  [getAllBooks, setBooks],
+)
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
 function getAllBooks() {
     getAll().then(books => setBooks(books));
 }
@@ -24,7 +37,7 @@ function getAllBooks() {
 useEffect(() => {
     getAllBooks();
     console.log('books', books.length);
-}, [books.length]);
+}, [books.length, getAllBooks]);
 
     
     /**
