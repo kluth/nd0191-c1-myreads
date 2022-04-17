@@ -10,7 +10,7 @@ import { update } from '../../BooksAPI';
 const Book = ({book}) => {
   return (
     <li>
-        <div className="book">
+        <div className={`book ${book.shelf === 'none' ? 'noneShelf' : ''}`}>
             <div className="book-top">
                 { book.imageLinks ? (
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail}` }}></div>
@@ -18,7 +18,7 @@ const Book = ({book}) => {
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(https://via.placeholder.com/128x193?text=No%20Cover)` }}></div>
                 )}
                 <div className="book-shelf-changer">
-                    <select defaultValue={book.shelf} onChange={(event) => {
+                    <select defaultValue={`${book.shelf}`} onChange={(event) => {
                         // remove book from current shelf and add to the selected shelf
                         update(book, event.target.value);
                     }}>

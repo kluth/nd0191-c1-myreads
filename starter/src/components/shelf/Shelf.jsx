@@ -8,12 +8,7 @@ import Panel from './Panel';
  * The main component for the application.
  * @returns None
  */
-const Shelf = () => {
-    /**
-     * Gets all the books from the database and sets them as the state.
-     * @returns None
-     */
-    const [ books, setBooks ] = useState([]);
+const Shelf = ({books, setBooks}) => {
 
 /**
  * Gets all the books from the database and sets them to the state.
@@ -28,7 +23,7 @@ function getAllBooks() {
  */
 useEffect(() => {
     getAllBooks();
-}, [books]);
+}, [books.length]);
 
     
     /**

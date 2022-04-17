@@ -5,12 +5,24 @@ import Book from '../book/Book';
 
 
 
-const Search = () => {
+const Search = ({books, setBooks}) => {
     const [query, setQuery] = useState('');
     const [foundBooks, setFoundBooks] = useState([]);
     useEffect(() => {
         if (query) {
-            search(query).then(books => setFoundBooks(books));
+            search(query).then(booksFromSearch => {
+                booksFromSearch.map(book => {
+                    // find current book in books and set shelf
+                    const currentBook = books.find(b => b.id === book.id);
+                    if (currentBook) {
+                        book.shelf = currentBook.shelf;
+                    } else {
+                        book.shelf = 'none';
+                    }
+                    return book;
+            });
+            setFoundBooks(booksFromSearch);
+        });
         } else {
             setFoundBooks([]);
         }
