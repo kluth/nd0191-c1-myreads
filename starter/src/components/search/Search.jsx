@@ -36,7 +36,9 @@ const Search = ({books, setBooks}) => {
             {/* link back to home */}
             <Link to="/" className="close-search">Close</Link>
             <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" onInput={(event) => setQuery(event.target.value)}/>
+                <input type="text" placeholder="Search by title or author" onInput={(event) => {
+                    setQuery(event.target.value);
+                }}/>
             </div>
         </div>
         <div className="search-books-results">

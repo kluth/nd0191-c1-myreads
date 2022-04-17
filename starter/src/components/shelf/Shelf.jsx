@@ -23,6 +23,7 @@ function getAllBooks() {
  */
 useEffect(() => {
     getAllBooks();
+    console.log('books', books.length);
 }, [books.length]);
 
     
